@@ -3,7 +3,7 @@
 #include <time.h>
 
 /**
- * assign a random number to the variable n each time it is executed
+ * assigns a random number to the variable n each time it is executed
  * variable will store a different number every time program is run
  * Return: Always (Success)
  */
@@ -15,7 +15,7 @@ int main(void)
 	srand(time(0));
 	n = rand() - RAND_MAX / 2;
 
-	/* print whether the number stored in variable n is positive or negative*/
+	/* prints whether the number stored in variable n is positive or negative*/
 
 	if (n > 0)
 	{
