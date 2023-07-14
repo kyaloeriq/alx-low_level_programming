@@ -11,11 +11,11 @@ int main(void)
 	srand(time(0));
 	n = rand() - RAND_MAX / 2;
 	/* print whether the number stored in variable n is positive or negative*/
-	if (x>0)
+	if (n>0)
 	{
 		printf("The number is positive \n");
 	}
-	else if (x<0)
+	else if (n<0)
 	{
 		printf("The number is negative \n");
 	}
