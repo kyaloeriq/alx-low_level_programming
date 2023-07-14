@@ -1,9 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+
 /**
  * assign a random number to the variable n each time it is executed
+ * variable will store a different number every time program is run
+ * Return: Always 0
  */
+
 int main(void)
 {
 	int n;
