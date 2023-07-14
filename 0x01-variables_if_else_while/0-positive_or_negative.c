@@ -1,15 +1,16 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-/* more headers goes there */
-
-/* betty style doc for function main goes there */
+/**
+ * assign a random number to the variable n each time it is executed
+ */
 int main(void)
 {
 	int n;
 
 	srand(time(0));
 	n = rand() - RAND_MAX / 2;
-	/* your code goes there */
+	/* print whether the number stored in variable n is positive or negative*/
 	if (x>0)
 	{
 		printf("The number is positive \n");
