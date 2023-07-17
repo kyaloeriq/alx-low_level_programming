@@ -7,16 +7,16 @@
  */
 int main(void)
 {
-	int digit1, digit2;
+	int a, b;
 
-	for (digit1 = 0; digit1 < 9; digit1++)
+	for (a = 0; a < 9; a++)
 	{
-		for (digit2 = digit1 + 1; digit2 < 10; digit2++)
+		for (b = a + 1; b < 10; b++)
 		{
-			putchar((digit1 % 10) + '0');
-			putchar ((digit2 % 10) + '0');
+			putchar((a % 10) + '0');
+			putchar((b % 10) + '0');
 
-			if (digit1 == 8 && digit2 == 9)
+			if (a == 8 && b == 9)
 			continue;
 
 		putchar(',');
