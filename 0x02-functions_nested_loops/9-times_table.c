@@ -20,7 +20,6 @@ void times_table(void)
 			{
 				_putchar(',');
 				_putchar(' ');
-				_putchar(' ');
 				_putchar(r + '0');
 			}
 			else if (r >= 10)
