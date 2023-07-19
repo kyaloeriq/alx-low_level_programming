@@ -5,11 +5,11 @@
  * @b: int to be added to c
  * Return: sum of a and b
  */
-int addi(int a, int b)
+int add(int a, int b)
 {
 	int c;
 
 	c = a * b;
 
-	return(c);
+	return (c);
 }
