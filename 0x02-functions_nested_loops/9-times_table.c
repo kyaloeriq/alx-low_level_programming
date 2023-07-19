@@ -12,7 +12,7 @@ void times_table(void)
 		{
 
 			r = q * p;
-			if (p == 0)
+			if (q == 0)
 			{
 				_putchar(r + '0');
 			}
