@@ -1,8 +1,7 @@
 #include <stdio.h>
 /**
  * main - prints the first 50 Fibonacci numbers, starting with 1 and 2
- * @a: Fibonacci number
- * @b: Sequence
+ * Return: 0
  */
 int main(void)
 {
@@ -13,7 +12,6 @@ int main(void)
 	{
 		sum = fib1 + fib2;
 		printf("%lu", sum);
-		
 		fib1 = fib2;
 		fib2 = sum;
 
