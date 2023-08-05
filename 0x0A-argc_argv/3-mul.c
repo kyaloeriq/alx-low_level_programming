@@ -2,9 +2,6 @@
 #include <stdlib.h>
 /**
  * main - multiplies two numbers
- * @a: first number
- * @b: 2nd number
- * @mul: product
  * @argc: argument count
  * @argv: passed arguments
  * Return: 0 if successful and 1 if not
