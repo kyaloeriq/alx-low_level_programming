@@ -8,23 +8,18 @@
  */
 int main(int argc, char *argv[])
 {
-        int a, b, sum;
+	int a, b, sum;
 
-        if (argv < 1)
-        {
-                printf("Error\n");
-                return (1);
-        }
-	if (argv != int)
+	if (argc < 1)
 	{
-		printf("Error\n");
-		return (1);
+		printf("0\n");
 	}
 
-        a = atoi(argv[1]);
-        b = atoi(argv[2]);
+	a = atoi(argv[1]);
+	b = atoi(argv[2]);
 
-        sum = a + b;
-        printf("%d\n", sum);
-        return (0);
+	sum = a + b;
+
+	printf("%d\n", sum);
+	return (0);
 }
