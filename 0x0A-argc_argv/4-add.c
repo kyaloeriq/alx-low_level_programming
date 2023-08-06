@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 /**
  * main - adds two numbers
  * @argc: argument count
@@ -8,18 +9,32 @@
  */
 int main(int argc, char *argv[])
 {
-	int a, b, sum;
+	int a, sum = 0;
 
-	if (argc != 3)
+	if (argc == 1)
 	{
 		printf("0\n");
+		return (0);
 	}
 
-	a = atoi(argv[1]);
-	b = atoi(argv[2]);
+	for (a = 1; a < argc; a++)
+	{
+		char *num_str = argv[a];
+		int num;
+		int b = 0;
 
-	sum = a + b;
-
+		while (num_str[b] != '\0')
+		{
+			if (!isdigit(num_str[b]))
+			{
+				printf("Error\n");
+				return (1);
+			}
+			b++;
+		}
+		num = atoi(num_str);
+		sum += num;
+	}
 	printf("%d\n", sum);
 	return (0);
 }
