@@ -2,10 +2,9 @@
 #include <stdlib.h>
 /**
  * minimumCoins - prints the minimum number of coins
- * main - calls minimumCoins
  * required to make change
  * @cents: number of coins to give back
- * Return: Error if number of arg passed is not 1
+ * Return: minimum number of coins required to make change
  */
 int minimumCoins(int cents)
 {
@@ -25,6 +24,7 @@ int minimumCoins(int cents)
 	}
 	return (count);
 }
+/*Entry point of the program*/
 int main(int argc, char *argv[])
 {
 	int cents;
