@@ -26,4 +26,4 @@ char *str_concat(char *s1, char *s2)
 	strcpy(concatenated, s1);
 	strcat(concatenated, s2);
 	return (concatenated);
-}	
+}
