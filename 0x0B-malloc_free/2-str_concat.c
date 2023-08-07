@@ -2,7 +2,8 @@
 #include <string.h>
 /**
  * str_concat - concatenates two strings
- *
+ * @s1: Ist string
+ * @s2: 2nd string
  * Return: pointer to a new allocated space
  */
 char *str_concat(char *s1, char *s2)
@@ -25,4 +26,4 @@ char *str_concat(char *s1, char *s2)
 	strcpy(concatenated, s1);
 	strcat(concatenated, s2);
 	return (concatenated);
-}		
+}	
