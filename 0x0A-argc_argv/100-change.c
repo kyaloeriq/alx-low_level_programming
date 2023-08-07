@@ -24,7 +24,13 @@ int minimumCoins(int cents)
 	}
 	return (count);
 }
-/*Entry point of the program*/
+
+/**
+ * main - calculates minimum number of coins
+ * @argc: number of arguments
+ * @argv: array of strings containing the arguments
+ * Return: 0 on sucess, 1 on error
+ */
 int main(int argc, char *argv[])
 {
 	int cents;
