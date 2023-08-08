@@ -11,7 +11,7 @@ void free_grid(int **grid, int height)
 	int a;
 	int **ptr;
 
-	ptr  = (int **)malloc(height * sizeof(int *));
+	ptr  = 0;
 	(void)grid;
 
 	if (ptr == NULL || height <= 0)
