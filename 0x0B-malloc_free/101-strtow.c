@@ -88,13 +88,13 @@ char **strtow(char *str)
 	word_array[current_word] = (char *)malloc((word_length + 1) * sizeof(char));
 	if (word_array[current_word] == NULL)
 	{
-		for (a = 0; a < current_word; a++) 
+		for (a = 0; a < current_word; a++)
 		{
-                free(word_array);
+			free(word_array);
 		}
-            free(word_array);
-            return NULL;
-        }
+	free(word_array);
+	return (NULL);
+	}
 	strncpy(word_array[current_word], word_start, word_length);
 	word_array[current_word][word_length] = '\0';
 	current_word++;
