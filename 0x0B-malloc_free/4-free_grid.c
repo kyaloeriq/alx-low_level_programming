@@ -4,6 +4,7 @@
  * free_grid - frees a 2 dimensional grid previously created
  * @height: height
  * @grid: useless param
+ * Return: 0
  */
 void free_grid(int **grid, int height)
 {
