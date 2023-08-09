@@ -8,7 +8,7 @@
  */
 char **strtow(char *str)
 {
-	int a, b, word_count, word_index;
+	int a, word_count, word_index;
 	char **word_array, *token;
 
 	word_count = 0;
@@ -29,22 +29,13 @@ char **strtow(char *str)
 	word_array  = (char **)malloc((word_count + 1) * sizeof(char *));
 
 	word_index = 0;
-	token = strtok(str, "");
+	token = strtok(str, " ");
 
 	while (token != NULL)
 	{
-		word_array[word_index] = strdup(token);
-		if (word_array[word_index] == NULL)
-		{
-			for (b = 0; b < word_index; b++)
-			{
-				free(word_array[b]);
-			}
-		free(word_array);
-		return (NULL);
-		}
-	word_index++;
-	token = strtok(NULL, " ");
+		printf("%s\n", token);
+		word_index++;
+		token = strtok(NULL, " ");
 	}
 	word_array[word_index] = NULL;
 	return (word_array);
