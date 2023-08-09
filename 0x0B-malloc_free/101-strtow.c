@@ -18,8 +18,6 @@ char **strtow(char *str)
 		return (NULL);
 	}
 
-	word_array  = (char **)malloc((word_count + 1) * sizeof(char *));
-
 	for (a = 0; str[a] != '\0'; a++)
 	{
 
@@ -28,6 +26,8 @@ char **strtow(char *str)
 			word_count++;
 		}
 	}
+	word_array  = (char **)malloc((word_count + 1) * sizeof(char *));
+
 	word_index = 0;
 	token = strtok(str, "");
 
