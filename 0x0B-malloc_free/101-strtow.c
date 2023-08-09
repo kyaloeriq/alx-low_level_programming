@@ -33,6 +33,7 @@ char **strtow(char *str)
 	token = strtok(str, " ");
 	while (token != NULL)
 	{
+		printf("%s\n", token);
 		word_array[word_index] = strdup(token);
 		if (word_array[word_index] == NULL)
 		{
