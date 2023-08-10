@@ -36,7 +36,7 @@ char **strtow(char *str)
 		word_array[word_index] = strdup(token);
 		if (word_array[word_index] == NULL)
 		{
-			for (b = 0; b < word_index; b++)
+			for (b = 0; b <= word_index; b++)
 			{
 				free(word_array[b]);
 			}
