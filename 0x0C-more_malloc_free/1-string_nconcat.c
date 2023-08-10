@@ -32,4 +32,6 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 	}
 	concat[a] = '\0';
 	return (concat);
+	free(concat);
+	return (0);
 }
