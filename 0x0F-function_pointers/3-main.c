@@ -9,7 +9,7 @@
  */
 int main(int argc, char *argv[])
 {
-	char operator;
+	char op;
 	int num1, num2;
 	int result;
 	int (*calc_func)(int, int);
@@ -20,20 +20,20 @@ int main(int argc, char *argv[])
 		exit(98);
 	}
 
-	operator = argv[2][0];
-	if (operator != '+' && operator != '-' && operator != '*' && operator != '/' && operator != '%')
+	op = argv[2][0];
+	if (op != '+' && op != '-' && op != '*' && op != '/' && op != '%')
 	{
 		printf("Error\n");
 		exit(99);
 	}
-	if ((operator == '/' || operator == '%') && atoi(argv[3]) == 0)
+	if ((op == '/' || op == '%') && atoi(argv[3]) == 0)
 	{
 		printf("Error\n");
 		exit(100);
 	}
 	num1 = atoi(argv[1]);
 	num2 = atoi(argv[3]);
-	calc_func = get_op_func(&operator);
+	calc_func = get_op_func(&op);
 	if (calc_func == NULL)
 	{
 		printf("Error\n");
