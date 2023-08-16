@@ -8,5 +8,12 @@
  */
 void print_name(char *name, void (*f)(char *))
 {
-	f(name);
+	if (name == NULL)
+	{
+		printf("Name is NULL\n");
+	}
+	else
+	{
+		f(name);
+	}
 }
