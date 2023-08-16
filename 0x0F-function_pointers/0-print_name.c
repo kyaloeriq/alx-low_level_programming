@@ -8,11 +8,7 @@
  */
 void print_name(char *name, void (*f)(char *))
 {
-	if (name == NULL)
-	{
-		printf("Name is NULL\n");
-	}
-	else
+	if (name != NULL)
 	{
 		f(name);
 	}
