@@ -14,16 +14,17 @@ int main(int argc, char *argv[])
 	int result;
 	int (*calc_func)(int, int);
 
-	op = argv[2][0];
-	num1 = atoi(argv[1]);
-	num2 = atoi(argv[3]);
-	calc_func = get_op_func(&op);
-
 	if (argc != 4)
 	{
 		printf("Error\n");
 		exit(98);
 	}
+
+	op = argv[2][0];
+	num1 = atoi(argv[1]);
+	num2 = atoi(argv[3]);
+	calc_func = get_op_func(&op);
+
 	if (op != '+' && op != '-' && op != '*' && op != '/' && op != '%')
 	{
 		printf("Error\n");
