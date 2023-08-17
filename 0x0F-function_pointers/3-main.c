@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
 		printf("Error\n");
 		exit(99);
 	}
-	if ((op == '/' || op == '%') && atoi(argv[3]) == 0)
+	if (num2 == 0 && (argv[2][0] == '/' || argv[2][0] == '%'))
 	{
 		printf("Error\n");
 		exit(100);
