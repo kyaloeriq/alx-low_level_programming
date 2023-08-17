@@ -12,23 +12,19 @@ int main(int argc, char *argv[])
 	unsigned char *main_ptr;
 	int a;
 
-	number_of_bytes = 0;
-
 	if (argc != 2)
 	{
 		printf("Error\n");
-		exit(1);
+		return (1);
 	}
 
 	number_of_bytes = atoi(argv[1]);
 
-	if (number_of_bytes < 0)
+	if (number_of_bytes <= 0)
 	{
 		printf("Error\n");
-		exit(2);
+		return (2);
 	}
-
-	printf("%d\n", number_of_bytes);
 
 	main_ptr = (unsigned char *)main;
 
