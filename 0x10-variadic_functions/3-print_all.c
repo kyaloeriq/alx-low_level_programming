@@ -19,7 +19,7 @@ void print_all(const char * const format, ...)
 	va_start(args, format);
 	while (format && fmt_ptr[a])
 	{
-		if (fmt_ptr[a] == 'c' || fmt_ptr[a] == 'i' || fmt_ptr[a] == 'f' || fmt_ptr[a] == 's')
+	if (fmt_ptr[a] == 'c' || fmt_ptr[a] == 'i' || fmt_ptr[a] == 'f' || fmt_ptr[a] == 's')
 		{
 		if (separator)
 			printf(", ");
@@ -31,17 +31,18 @@ void print_all(const char * const format, ...)
 		else if (fmt_ptr[a] == 'f')
 			printf("%f", va_arg(args, double));
 		else if (fmt_ptr[a] == 's')
-		{	
+		{
+
 			char *str = va_arg(args, char *);
+
 			if (str == NULL)
 				printf("(nil)");
 			else
-			printf("%s", str);	
+				printf("%s", str);
 		}
-	       
-	}	
-	a++;
-	}	
+		}
+		a++;
+	}
 	va_end(args);
 	putchar('\n');
 }
