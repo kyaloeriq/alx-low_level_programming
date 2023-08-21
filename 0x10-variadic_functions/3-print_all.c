@@ -9,37 +9,39 @@
 void print_all(const char * const format, ...)
 {
 	va_list args;
-	unsigned int a;
-	const char *fmt_ptr;
-	int separator;
+	char *separator;
+	int a;
 
-	separator = 0;
-	fmt_ptr = format;
+	separator = "";
 	a = 0;
 	va_start(args, format);
-	while (format && fmt_ptr[a])
+	while (format && format[a])
 	{
-	if (fmt_ptr[a] == 'c' || fmt_ptr[a] == 'i' || fmt_ptr[a] == 'f' || fmt_ptr[a] == 's')
+		if (format[a] == 'c')
 		{
-		if (separator)
-			printf(", ");
-		separator = 1;
-		if (fmt_ptr[a] == 'c')
-			printf("%c", va_arg(args, int));
-		else if (fmt_ptr[a] == 'i')
-			printf("%d", va_arg(args, int));
-		else if (fmt_ptr[a] == 'f')
-			printf("%f", va_arg(args, double));
-		else if (fmt_ptr[a] == 's')
+			printf("%s%c", separator, va_arg(args, int));
+			separator = ", ";
+		}
+		else if (format[a] == 'i')
+		{
+			printf("%s%d", separator, va_arg(args, int));
+			separator = ", ";
+		}
+		else if (format[a] == 'f')
+		{
+			printf("%s%f", separator, va_arg(args, double));
+			separator = ", ";
+		}
+		else if (format[a] == 's')
 		{
 
 			char *str = va_arg(args, char *);
 
 			if (str == NULL)
-				printf("(nil)");
+				printf("(%s(nil)", separator);
 			else
-				printf("%s", str);
-		}
+				printf("%s%s", separator, str);
+			separator = ", ";
 		}
 		a++;
 	}
