@@ -48,7 +48,6 @@ void print_all(const char * const format, ...)
 	size_t num_handlers;
 	int format_index;
 
-	b = 0;
 	format_index = 0;
 	va_start(args, format);
 
@@ -56,6 +55,8 @@ void print_all(const char * const format, ...)
 	while (format && format[format_index])
 	{
 		current_format = format[format_index];
+		b = 0;
+
 		while (b < num_handlers && handlers[b].format != current_format)
 		{
 			b++;
