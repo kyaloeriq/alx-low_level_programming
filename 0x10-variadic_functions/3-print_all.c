@@ -1,6 +1,40 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include "variadic_functions.h"
+
+typedef struct
+{
+	char format;
+	void (*print_function)(va_list);
+}FormatHandler;
+
+void print_char(va_list args)
+{
+	printf("%c", va_arg(args, int));
+}
+void print_int(va_list args)
+{
+	printf("%d", va_arg(args, int));
+}
+void print_float(va_list args)
+{
+	printf("%f", va_arg(args, double));
+}
+void print_string(va_list args)
+{
+	char *str = va_arg(args, char *);
+	if (str == NULL)
+		printf("(nil)");
+	else
+		printf("%s", str);
+}
+FormatHandler handlers[] = {
+	{'c', print_char},
+	{'i', print_int},
+	{'f', print_float},
+	{'s', print_string},
+};
+
 /**
  * print_all - prints anything
  * @format: list of all types of args passed
@@ -9,44 +43,32 @@
 void print_all(const char * const format, ...)
 {
 	va_list args;
-	char *separator;
-	int a;
+	size_t b;
+	char current_format;
+	size_t num_handlers;
+	int format_index;
 
-	separator = "";
-	a = 0;
+	b = 0;
+	format_index = 0;
 	va_start(args, format);
-	while (format && format[a])
+
+	num_handlers = sizeof(handlers) / sizeof(handlers[0]);
+	while (format && format[format_index])
 	{
-		while (format[a] != 'c' && format[a] != 'i' && format[a] != 'f' && format[a] != 's' && format[a])
+		current_format = format[format_index];
+		while (b < num_handlers && handlers[b].format != current_format)
 		{
-			a++;
+			b++;
 		}
-		if (!format[a])
-			break;
-		if (format[a] == 'c')
+		if (b < num_handlers)
 		{
-			printf("%s%c", separator, va_arg(args, int));
+			handlers[b].print_function(args);
+			if (format[format_index + 1] != '\0')
+			{
+				printf(", ");
+			}
 		}
-		if (format[a] == 'i')
-		{
-			printf("%s%d", separator, va_arg(args, int));
-		}
-		if (format[a] == 'f')
-		{
-			printf("%s%f", separator, va_arg(args, double));
-		}
-		if (format[a] == 's')
-		{
-
-			char *str = va_arg(args, char *);
-
-			if (str == NULL)
-				printf("(%s(nil)", separator);
-			else
-				printf("%s%s", separator, str);
-		}
-		separator = ", ";
-		a++;
+		format_index++;
 	}
 	va_end(args);
 	putchar('\n');
