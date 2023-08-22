@@ -20,11 +20,9 @@ void print_all(const char * const format, ...)
 	a = 0;
 
 	va_start(args, format);
-
 	while (format && format[a])
 	{
 		valid_type = 1;
-
 		if (format[a] == 'c')
 		{
 			c = va_arg(args, int);
