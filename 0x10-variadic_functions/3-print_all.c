@@ -11,52 +11,34 @@ void print_all(const char * const format, ...)
 {
 	int a;
 	int valid_type;
-	char c;
 	char *str;
-	int num;
-	double num1;
 	va_list args;
 
 	a = 0;
+	valid_type = 1;
 
 	va_start(args, format);
 	while (format && format[a])
 	{
-		valid_type = 1;
-		if (format[a] == 'c')
-		{
-			c = va_arg(args, int);
-			printf("%c", c);
-		}
-		else if (format[a] == 'i')
-		{
-			num = va_arg(args, int);
-			printf("%d", num);
-		}
-		else if (format[a] == 'f')
-		{
-			num1 = va_arg(args, double);
-			printf("%f", num1);
-		}
-		else if (format[a] == 's')
+		if (format[a] == 'c' && (valid_type = 0) == 0)
+			printf("%c", va_arg(args, int));
+
+		if (format[a] == 'i' && (valid_type = 0) == 0)
+			printf("%d", va_arg(args, int));
+
+		if (format[a] == 'f' && (valid_type = 0) == 0)
+			printf("%f", va_arg(args, double));
+
+		if (format[a] == 's' && (valid_type = 0) == 0)
 		{
 			str = va_arg(args, char *);
-			if (str == NULL)
-				printf("(nil)");
-			else
-				printf("%s", str);
+			printf("%s", str ? str : "(nil)");
 		}
-		else
-		{
-			valid_type = 0;
-		}
-		if (valid_type && format[a + 1])
+		if (format[a + 1] && valid_type == 0)
 			printf(", ");
+		
+		valid_type = 1;
 		a++;
-		while (format[a] && format[a] != 'c' && format[a] != 'i' && format[a] != 'f' && format[a] != 's')
-		{
-			a++;
-		}
 	}
 	va_end(args);
 	putchar('\n');
