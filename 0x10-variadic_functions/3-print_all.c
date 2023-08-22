@@ -1,6 +1,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <stddef.h>
+#include <string.h>
 #include "variadic_functions.h"
 
 /**
@@ -35,15 +36,13 @@ void print_all(const char * const format, ...)
 
 			case 's':
 				str = va_arg(args, char *);
-				if (str == NULL)
-					printf("(nil)");
-				else
-					printf("%s", str);
+				str = (str == NULL) ? "(nil)" : str;
+				printf("%s", str);
 				break;
 			default:
 				break;
 		}
-		if ((format[a] == 'c' || format[a] == 'i' || format[a] == 'f' || format[a] == 's') && format[a + 1])
+		if (format[a + 1] && strchr("cifs", format[a]))
 			printf(", ");
 		a++;
 	}
