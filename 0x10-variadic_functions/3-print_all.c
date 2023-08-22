@@ -20,18 +20,18 @@ void print_all(const char * const format, ...)
 	va_start(args, format);
 	while (format && format[a])
 	{
-		if ((format[a] == 'c' || format[a] == 'i' || format[a] == 'f' || format[a] == 's') && (valid_type == 0))
+		if (valid_type == 0)
 		{
 			if (format[a] == 'c')
 			printf("%c", va_arg(args, int));
 
-			else if (format[a] == 'i')
+			if (format[a] == 'i')
 			printf("%d", va_arg(args, int));
 
-			else if (format[a] == 'f')
+			if (format[a] == 'f')
 			printf("%f", va_arg(args, double));
 
-			else if (format[a] == 's')
+			if (format[a] == 's')
 			{
 				str = va_arg(args, char *);
 				printf("%s", str ? str : "(nil)");
@@ -39,7 +39,8 @@ void print_all(const char * const format, ...)
 			if (format[a + 1])
 			printf(", ");
 		}
-		valid_type = (format[a] == 'c' || format[a] == 'i' || format[a] == 'f' || format[a] == 's') ? 0 : 1;
+		if (format[a] == 'c' || format[a] == 'i' || format[a] == 'f' || format[a] == 's')
+			valid_type = 0;
 		a++;
 	}
 	va_end(args);
