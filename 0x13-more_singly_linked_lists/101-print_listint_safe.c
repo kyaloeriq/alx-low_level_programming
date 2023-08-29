@@ -9,17 +9,20 @@
 size_t print_listint_safe(const listint_t *head)
 {
 	size_t count = 0;
-	const listint_t *current = head;
+	const listint_t *slow = head, *fast = head;
 
-	while (current != NULL)
+	while (fast != NULL && fast->next != NULL)
 	{
-		printf("[0x%lx]%d\n", (unsigned long)current, current->n);
+		slow = slow->next;
+		fast = fast->next->next;
+
+		printf("[0x%lx]%d\n", (unsigned long)slow, slow->n);
 		count++;
-		if (current >= current->next)
+
+		if (slow == fast)
 		{
 			exit(98);
 		}
-		current = current->next;
 	}
 	return (count);
 }
