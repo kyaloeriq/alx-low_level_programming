@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/stat.h>
 #include "main.h"
 /**
  * main - copies the content of a file to another file
@@ -17,8 +18,7 @@ int main(int argc, char *argv[])
 	size_t bytes;
 
 	if (argc != 3)
-	{
-		fprintf(stderr, "Usage: cp file_from file_to\n");
+	{	fprintf(stderr, "Usage: cp file_from file_to\n");
 		exit(97);
 	}
 	src = fopen(original, "rb");
@@ -48,5 +48,6 @@ int main(int argc, char *argv[])
 	if (fclose(dest) != 0)
 	{	perror("Error: Can't close fd copy\n");
 		exit(100); }
+	chmod(copy, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
 	return (0);
 }
