@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <unistd.h>
 #include <stdlib.h>
 #include "main.h"
 /**
@@ -19,20 +18,19 @@ int main(int argc, char *argv[])
 
 	if (argc != 3)
 	{
-		fprintf(stderr, "Usage: %s <source_file><destination_file>\n", argv[0]);
-		return (-1);
+		fprintf(stderr, "Usage: cp file_from file_to\n");
+		exit(97);
 	}
 	src = fopen(original, "rb");
 	if (src == NULL)
 	{
-		exit(98);
 		perror("Error: Can't read from file original\n");
+		exit(98);
 	}
 	dest = fopen(copy, "wb");
 	if (dest == NULL)
-	{
+	{	perror("Error: Can't write to copy\n");
 		exit(99);
-		perror("Error: Can't write to copy\n");
 		fclose(src);
 	}
 	while ((bytes = fread(buf, 1, sizeof(buf), src)) > 0)
@@ -44,8 +42,11 @@ int main(int argc, char *argv[])
 			fclose(dest);
 		}
 	}
-	fclose(src);
-	fclose(dest);
+	if (fclose(src) != 0)
+	{	perror("Error: Can't close fd FD_VALUE\n");
+		exit(100); }
+	if (fclose(dest) != 0)
+	{	perror("Error: Can't close fd FD_VALUE\n");
+		exit(100); }
 	return (0);
 }
-
