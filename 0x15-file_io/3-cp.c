@@ -23,15 +23,15 @@ int main(int argc, char *argv[])
 	}
 	src = fopen(original, "rb");
 	if (src == NULL)
-	{
-		perror("Error: Can't read from file original\n");
+	{	perror("Error: Can't read from file original\n");
+		fclose(src);
 		exit(98);
 	}
 	dest = fopen(copy, "wb");
 	if (dest == NULL)
 	{	perror("Error: Can't write to copy\n");
+		fclose(dest);
 		exit(99);
-		fclose(src);
 	}
 	while ((bytes = fread(buf, 1, sizeof(buf), src)) > 0)
 	{
@@ -43,10 +43,10 @@ int main(int argc, char *argv[])
 		}
 	}
 	if (fclose(src) != 0)
-	{	perror("Error: Can't close fd FD_VALUE\n");
+	{	perror("Error: Can't close fd original\n");
 		exit(100); }
 	if (fclose(dest) != 0)
-	{	perror("Error: Can't close fd FD_VALUE\n");
+	{	perror("Error: Can't close fd copy\n");
 		exit(100); }
 	return (0);
 }
