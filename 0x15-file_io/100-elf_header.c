@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <string.h>
 #include "main.h"
 /**
  * main - displays info. contained in the ELF header
@@ -13,6 +14,7 @@ int main(int argc, char *argv[])
 {
 	FILE *efile;
 	ELFhdr a;
+	int b;
 
 	if (argc != 2)
 	{
@@ -33,16 +35,21 @@ int main(int argc, char *argv[])
 		exit(98);
 	}
 
-	printf("Magic: %02x %02x %02x %02x\n", a.e_ident[0], a.e_ident[1], a.e_ident[2], a.e_ident[3]);
-	printf("Class: %d-bit\n", (a.e_ident[4] == 1) ? 32 : 64);
-	printf("Data: %s-endian\n", (a.e_ident[5] == 1) ? "Little" : "Big");
-	printf("Version: %d\n", a.e_ident[6]);
-	printf("OS/ABI: %d\n", a.e_ident[7]);
-	printf("ABI Version: %d\n", a.e_ident[8]);
-	printf("Type: %d\n", a.e_type);
-	printf("Entry point address: 0x%x\n", a.e_entry);
+	printf("ELF Header:\n");
+	printf("Magic:	");
+	for (b = 0; b < 16; b++)
+	{
+		printf("%02x ", a.e_ident[b]);
+	}
+	printf("\n");
+	printf(" Class:	ELF%d\n", (a.e_ident[4] == 1) ? 32 : 64);
+	printf(" Data:	%s's complement, %s-endian\n", (a.e_ident[5] == 1) ? "2" : "1", (a.e_ident[6] == 1) ? "Little" : "Big");
+	printf(" Version:	%d (current)\n", a.e_ident[6]);
+	printf(" OS/ABI:	%s\n", a.e_ident[7] == 0 ? "UNIX - System V" : "UNKNOWN");
+	printf(" ABI Version:	%d\n", a.e_ident[8]);
+	printf(" Type: %s\n", (a.e_type == 2) ? "EXEC (Executable file)" : "UNKNOWN");
+	printf(" Entry point address:	0x%x\n", a.e_entry);
 
 	fclose(efile);
 	return (0);
 }
-
