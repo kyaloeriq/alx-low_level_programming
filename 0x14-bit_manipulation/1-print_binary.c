@@ -10,12 +10,8 @@
 void print_binary(unsigned long int n)
 {
 
-	if (n == 0)
-	{
-		putchar('0');
-		return;
-	}
-
+	if (n > 1)
 	print_binary(n >> 1);/* shifts the bits to the right, effectively dividing the number by 2 */
+
 	putchar((n & 1) + '0');
 }
