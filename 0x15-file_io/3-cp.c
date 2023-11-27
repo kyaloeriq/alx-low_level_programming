@@ -18,20 +18,20 @@ int main(int argc, char *argv[])
 
 	if (argc != 3)
 	{
-		perror("Usage: cp file_from file_to");
+		perror("Usage: cp file_from file_to\n");
 		exit(97);
 	}
 	from = fopen(file_from, "rb");
 	if (from == NULL)
 	{
-		perror("Can't read from file_from");
+		perror("Can't read from file_from\n");
 		exit(98);
 	}
 
 	to = fopen(file_to, "wb");
 	if (to == NULL)
 	{
-		perror("Can't write to file_to");
+		perror("Can't write to file_to\n");
 		exit(99);
 	}
 	while ((read_bytes = fread(buffer, 1, sizeof(buffer), from)) > 0)
