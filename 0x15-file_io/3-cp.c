@@ -4,18 +4,23 @@
 #include "main.h"
 /**
  * main - copies the content of a file to another file
- * file_from: file to be copied from
- * file_to: file to be copied to
+ * @argc: 1st argument
+ * @argv: 2nd argument
  * Return: 0
  */
-int main(void)
+int main(int argc, char *argv[])
 {
-	const char *file_from = 0;
-	const char *file_to = 0;
+	const char *file_from = argv[1];
+	const char *file_to = argv[2];
 	FILE *from, *to;
 	char buffer[1024];
 	size_t read_bytes;
 
+	if (argc != 3)
+	{
+		perror("Usage: cp file_from file_to");
+		exit(97);
+	}
 	from = fopen(file_from, "rb");
 	if (from == NULL)
 	{
