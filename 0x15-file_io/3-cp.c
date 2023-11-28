@@ -52,7 +52,8 @@ int main(int argc, char *argv[])
 	to = fopen(file_to, "wb");
 	if (to == NULL)
 	{
-		fprintf(stderr, "Can't write to %s\n", file_to);
+		fprintf(stderr, "Error: Can't write to %s\n", file_to);
+		perror("fopen");
 		fclose(from);
 		exit(99);
 	}
