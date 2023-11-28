@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
 		fclose(from);
 		exit(98);
 	}
-	to = fopen(file_to, "wb");
+	to = fopen(file_to, (st.st_mode & S_IRUSR) ? "rb+" : "wb");
 	if (to == NULL)
 	{
 		fprintf(stderr, "Error: Can't write to %s\n", file_to);
@@ -77,7 +77,8 @@ int main(int argc, char *argv[])
 	{
 		if (fwrite(buffer, 1, read_bytes, to) != read_bytes)
 		{
-			perror("Can't write to file_to");
+			fprintf(stderr, "Error: Can't write to %s\n, file_to");
+			perror("fwrite");
 			fclose(from);
 			fclose(to);
 			exit(99);
