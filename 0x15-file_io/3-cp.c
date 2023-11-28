@@ -66,6 +66,12 @@ int main(int argc, char *argv[])
 			close_and_exit(from, 99);
 		}
 	}
+	if (close(to) == -1)
+	{
+		dprintf(2, "Error: Can't close fd %d\n", to);
+		perror("close");
+		exit(100);
+	}
 	close_and_exit(from, 100);
 	close_and_exit(to, 100);
 	return (0);
