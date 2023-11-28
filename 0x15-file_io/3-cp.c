@@ -31,20 +31,19 @@ int main(int argc, char *argv[])
 
 	if (argc != 3)
 	{
-		perror("Usage: cp file_from file_to\n");
+		fprintf(stderr, "Usage: %s file_from file_to\n", argv[0]);
 		exit(97);
 	}
 	from = fopen(file_from, "rb");
 	if (from == NULL)
 	{
-		perror("Can't read from file_from\n");
+		fprintf(stderr, "Can't read from %s\n", file_from);
 		exit(98);
 	}
-
 	to = fopen(file_to, "wb");
 	if (to == NULL)
 	{
-		perror("Can't write to file_to\n");
+		fprintf(stderr, "Can't write to %s\n", file_to);
 		fclose(from);
 		exit(99);
 	}
