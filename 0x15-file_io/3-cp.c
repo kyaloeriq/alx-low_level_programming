@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
 	}
 	if (st.st_mode & S_IRUSR)
 	{
-		if (cmod(file_to, st.st_mode) == -1)
+		if (chmod(file_to, st.st_mode) == -1)
 		{
 			perror("Error setting file permissions");
 			close_and_exit(fileno(from), 99);
