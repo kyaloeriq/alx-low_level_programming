@@ -77,7 +77,7 @@ int main(int argc, char *argv[])
 	{
 		if (fwrite(buffer, 1, read_bytes, to) != read_bytes)
 		{
-			fprintf(stderr, "Error: Can't write to %s\n, file_to");
+			fprintf(stderr, "Error: Can't write to %s\n", file_to);
 			perror("fwrite");
 			fclose(from);
 			fclose(to);
