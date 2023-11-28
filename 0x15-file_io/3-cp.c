@@ -32,8 +32,10 @@ int main(int argc, char *argv[])
 	struct stat st;
 
 	if (argc != 3)
+	{
 		perror("Usage: cp file_from file_to\n");
 		exit(97);
+	}
 	from = fopen(file_from, "rb");
 	if (from == NULL)
 	{
