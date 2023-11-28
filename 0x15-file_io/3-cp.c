@@ -6,19 +6,6 @@
 #include <sys/stat.h>
 #include "main.h"
 /**
- * close_and_exit - Closes a file descriptor
- * @fd: File descriptor to close
- * @exit_code: Exit code to use if an error occurs
- */
-void close_and_exit(int fd, int exit_code)
-{
-	if (close(fd) == -1)
-	{
-		dprintf(2, "Error: Can't close fd %d\n", fd);
-		exit(exit_code);
-	}
-}
-/**
  * main - copies the content of a file to another file
  * @argc: 1st argument
  * @argv: 2nd argument
@@ -31,7 +18,6 @@ int main(int argc, char *argv[])
 	int from, to;
 	char buffer[1024];
 	size_t read_bytes;
-	struct stat st;
 
 	if (argc != 3)
 	{
@@ -48,14 +34,14 @@ int main(int argc, char *argv[])
 	if (to == -1)
 	{
 		dprintf(2, "Error: Can't write to %s\n", file_to);
-		close_and_exit(from, 99);
+		exit(99);
 	}
 	while ((read_bytes = read(from, buffer, sizeof(buffer))) > 0)
 	{
 		if (write(to, buffer, read_bytes) != read_bytes)
 		{
 			dprintf(2, "Error: Can't write to %s\n", file_to);
-			close_and_exit(from, 99);
+			exit(99);
 		}
 	}
 	if (close(to) == -1)
@@ -63,5 +49,5 @@ int main(int argc, char *argv[])
 		dprintf(2, "Error: Can't close fd %d\n", to);
 		exit(100);
 	}
-	close_and_exit(from, 0);
+	exit(0);
 }
