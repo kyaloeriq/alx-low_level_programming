@@ -3,6 +3,19 @@
 #include <unistd.h>
 #include "main.h"
 /**
+ * close_and_exit - Closes a file descriptor
+ * @fd: File descriptor to close
+ * @exit_code: Exit code to use if an error occurs
+ */
+void close_and_exit(int fd, int exit_code)
+{
+	if (close(fd) == -1)
+	{
+		fprintf(stderr, "Error: Can't close fd %d\n", fd);
+		exit(exit_code);
+	}
+}
+/**
  * main - copies the content of a file to another file
  * @argc: 1st argument
  * @argv: 2nd argument
@@ -32,6 +45,7 @@ int main(int argc, char *argv[])
 	if (to == NULL)
 	{
 		perror("Can't write to file_to\n");
+		fclose(from);
 		exit(99);
 	}
 	while ((read_bytes = fread(buffer, 1, sizeof(buffer), from)) > 0)
@@ -44,7 +58,7 @@ int main(int argc, char *argv[])
 			exit(99);
 		}
 	}
-	fclose(from);
-	fclose(to);
+	close_and_exit(fileno(from), 100);
+	close_and_exit(fileno(to), 100);
 	return (0);
 }
