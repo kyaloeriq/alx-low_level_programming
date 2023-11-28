@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <sys/stat.h>
 #include "main.h"
 /**
  * close_and_exit - Closes a file descriptor
@@ -28,6 +29,7 @@ int main(int argc, char *argv[])
 	FILE *from, *to;
 	char buffer[1024];
 	size_t read_bytes;
+	struct stat st;
 
 	if (argc != 3)
 	{
@@ -46,6 +48,15 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "Can't write to %s\n", file_to);
 		fclose(from);
 		exit(99);
+	}
+	if (st.st_mode & S_IRUSR)
+	{
+		if (cmod(file_to, st.st_mode) == -1)
+		{
+			perror("Error setting file permissions");
+			close_and_exit(fileno(from), 99);
+			close_and_exit(fileno(to), 99);
+		}
 	}
 	while ((read_bytes = fread(buffer, 1, sizeof(buffer), from)) > 0)
 	{
