@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
 		dprintf(2, "Error: Can't read from %s\n", file_from);
 		exit(98);
 	}
-	to = open(file_to, O_WRONLY | O_CREAT | O_TRUNC);
+	to = open(file_to, O_WRONLY | O_CREAT, 0);
 	if (to == -1)
 	{
 		dprintf(2, "Error: Can't write to %s\n", file_to);
