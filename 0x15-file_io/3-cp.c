@@ -15,7 +15,6 @@ void close_and_exit(int fd, int exit_code)
 	if (close(fd) == -1)
 	{
 		dprintf(2, "Error: Can't close fd %d\n", fd);
-		perror("close");
 		exit(exit_code);
 	}
 }
@@ -35,27 +34,22 @@ int main(int argc, char *argv[])
 	struct stat st;
 
 	if (argc != 3)
-	{
 		dprintf(2, "Usage: cp file_from file_to\n");
 		exit(97);
-	}
 	from = open(file_from, O_RDONLY);
 	if (from == -1)
 	{
 		dprintf(2, "Error: Can't read from %s\n", file_from);
-		perror("open");
 		exit(98);
 	}
 	if (fstat(from, &st) == -1)
 	{
-		perror("Error getting file information");
 		close_and_exit(from, 98);
 	}
 	to = open(file_to, O_WRONLY | O_CREAT | O_TRUNC, st.st_mode);
 	if (to == -1)
 	{
 		dprintf(2, "Error: Can't write to %s\n", file_to);
-		perror("open");
 		close_and_exit(from, 99);
 	}
 	while ((read_bytes = read(from, buffer, sizeof(buffer))) > 0)
@@ -63,14 +57,12 @@ int main(int argc, char *argv[])
 		if (write(to, buffer, read_bytes) != read_bytes)
 		{
 			dprintf(2, "Error: Can't write to %s\n", file_to);
-			perror("write");
 			close_and_exit(from, 99);
 		}
 	}
 	if (close(to) == -1)
 	{
 		dprintf(2, "Error: Can't close fd %d\n", to);
-		perror("close");
 		exit(100);
 	}
 	close_and_exit(from, 0);
