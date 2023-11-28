@@ -42,6 +42,12 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "Can't read from %s\n", file_from);
 		exit(98);
 	}
+	if (stat(file_to, &st) == -1)
+	{
+		perror("Error getting file information");
+		fclose(from);
+		exit(98);
+	}
 	to = fopen(file_to, "wb");
 	if (to == NULL)
 	{
