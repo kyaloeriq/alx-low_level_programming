@@ -57,6 +57,16 @@ int main(int argc, char *argv[])
 		perror("open");
 		close_and_exit(from, 99);
 	}
+	if (st.st_size == 0)
+	{
+		if (close(to) == -1)
+        	{
+                	dprintf(2, "Error: Can't close fd %d\n", to);
+                	perror("close");
+                	exit(100);
+        	}
+		close_and_exit(from, 0);
+	}
 	while ((read_bytes = read(from, buffer, sizeof(buffer))) > 0)
 	{
 		if (write(to, buffer, read_bytes) != read_bytes)
@@ -65,12 +75,6 @@ int main(int argc, char *argv[])
 			perror("write");
 			close_and_exit(from, 99);
 		}
-	}
-	if (close(to) == -1)
-	{
-		dprintf(2, "Error: Can't close fd %d\n", to);
-		perror("close");
-		exit(100);
 	}
 	close_and_exit(from, 100);
 	return (0);
