@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
 	from = fopen(file_from, "rb");
 	if (from == NULL)
 	{
-		fprintf(stderr, "Can't read from %s\n", file_from);
+		fprintf(stderr, "Error: Can't read from %s\n", file_from);
 		exit(98);
 	}
 	if (stat(file_to, &st) == -1)
