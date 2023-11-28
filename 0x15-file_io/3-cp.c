@@ -44,10 +44,6 @@ int main(int argc, char *argv[])
 		dprintf(2, "Error: Can't read from %s\n", file_from);
 		exit(98);
 	}
-	if (fstat(from, &st) == -1)
-	{
-		close_and_exit(from, 98);
-	}
 	to = open(file_to, O_WRONLY | O_CREAT | O_TRUNC, st.st_mode);
 	if (to == -1)
 	{
