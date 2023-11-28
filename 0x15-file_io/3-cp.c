@@ -13,6 +13,7 @@ void close_and_exit(int fd, int exit_code)
 	if (close(fd) == -1)
 	{
 		fprintf(stderr, "Error: Can't close fd %d\n", fd);
+		perror("close");
 		exit(exit_code);
 	}
 }
