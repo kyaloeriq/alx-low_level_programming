@@ -64,6 +64,12 @@ int main(int argc, char *argv[])
 			close_and_exit(fileno(to), 99);
 		}
 	}
+	if (truncate(file_to, 0) == -1)
+	{
+		perror("Error truncating file");
+		close_and_exit(fileno(from), 99);
+		close_and_exit(fileno(to), 99);
+	}
 	while ((read_bytes = fread(buffer, 1, sizeof(buffer), from)) > 0)
 	{
 		if (fwrite(buffer, 1, read_bytes, to) != read_bytes)
