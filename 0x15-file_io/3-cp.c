@@ -34,8 +34,10 @@ int main(int argc, char *argv[])
 	struct stat st;
 
 	if (argc != 3)
+	{
 		dprintf(2, "Usage: cp file_from file_to\n");
 		exit(97);
+	}
 	from = open(file_from, O_RDONLY);
 	if (from == -1)
 	{
