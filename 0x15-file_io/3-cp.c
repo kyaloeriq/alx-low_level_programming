@@ -73,6 +73,5 @@ int main(int argc, char *argv[])
 		exit(100);
 	}
 	close_and_exit(from, 100);
-	close_and_exit(to, 100);
 	return (0);
 }
