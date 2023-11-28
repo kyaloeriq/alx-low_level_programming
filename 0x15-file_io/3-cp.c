@@ -4,6 +4,20 @@
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include "main.h"
+/**
+ * close_and_exit - Closes file descriptor
+ * @fd: File descriptor to close
+ * @code_exit: Exit code incase of error
+ */
+void close_and_exit(int fd, int code_exit, const char *file_name)
+{
+	if (close(fd) == -1)
+	{
+		dprintf(2, "Error: Can't close fd %d\n", fd);
+		exit(code_exit);
+	}
+}
 /**
  * main - copies the content of a file to another file
  * @argc: 1st argument
@@ -34,14 +48,14 @@ int main(int argc, char *argv[])
 	if (to == -1)
 	{
 		dprintf(2, "Error: Can't write to %s\n", file_to);
-		exit(99);
+		close_and_exit(from, 99, file_from);
 	}
 	while ((bytes_read = read(from, buffer, sizeof(buffer))) > 0)
 	{
 		if (write(to, buffer, bytes_read) != bytes_read)
 		{
 			dprintf(2, "Error: Can't write to %s\n", file_to);
-			exit(99);
+			close_and_exit(from, 99, file_from);
 		}
 	}
 	if (close(to) == -1)
@@ -49,5 +63,5 @@ int main(int argc, char *argv[])
 		dprintf(2, "Error: Can't close fd %d\n", to);
 		exit(100);
 	}
-	exit(0);
+	close_and_exit(from, 0, file_from);
 }
