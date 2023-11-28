@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 {
 	const char *file_from = argv[1];
 	const char *file_to = argv[2];
-	int from, to;
+	int *from, *to;
 	char buffer[1024];
 	size_t read_bytes;
 
