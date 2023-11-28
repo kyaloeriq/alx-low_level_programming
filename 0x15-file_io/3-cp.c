@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
 	const char *file_to = argv[2];
 	int from, to;
 	char buffer[1024];
-	size_t read_bytes;
+	size_t bytes_read;
 
 	if (argc != 3)
 	{
@@ -36,9 +36,9 @@ int main(int argc, char *argv[])
 		dprintf(2, "Error: Can't write to %s\n", file_to);
 		exit(99);
 	}
-	while ((read_bytes = read(from, buffer, sizeof(buffer))) > 0)
+	while ((bytes_read = read(from, buffer, sizeof(buffer))) > 0)
 	{
-		if (write(to, buffer, read_bytes) != read_bytes)
+		if (write(to, buffer, bytes_read) != bytes_read)
 		{
 			dprintf(2, "Error: Can't write to %s\n", file_to);
 			exit(99);
