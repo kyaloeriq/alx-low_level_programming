@@ -40,6 +40,7 @@ int main(int argc, char *argv[])
 	if (from == NULL)
 	{
 		fprintf(stderr, "Error: Can't read from %s\n", file_from);
+		perror("fopen");
 		exit(98);
 	}
 	if (stat(file_to, &st) == -1)
