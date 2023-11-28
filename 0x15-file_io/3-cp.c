@@ -27,13 +27,13 @@ int main(int argc, char *argv[])
 	from = fopen(file_from, "rb");
 	if (from == NULL)
 	{
-		perror("Can't read from source file");
+		perror("Error: Can't read from file_from\n");
 		exit(98);
 	}
 	to = fopen(file_to, "wb");
 	if (to == NULL)
 	{
-		perror("Can't write to destination file");
+		perror("Error: Can't write to file_to\n");
 		close_and_exit(fileno(from), 100);
 		exit(99);
 	}
@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
 	{
 		if (fwrite(buffer, 1, read_bytes, to) != read_bytes)
 		{
-			perror("Can't write to destination file");
+			perror("Error: Can't write to file_to\n");
 			close_and_exit(fileno(from), 100);
 			close_and_exit(fileno(to), 100);
 			exit(100);
