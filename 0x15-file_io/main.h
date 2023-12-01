@@ -8,15 +8,16 @@ int append_text_to_file(const char *filename, char *text_content);
 void close_and_exit(int fd, int exit_code);
 
 struct elf_header {
-       	int magic;
-	int class;
-	int data;
-	int version;
-	int OS_ABI;
-	int ABIVersion;
-	int type;
-	int entrypointaddress;
+       	uint32_t magic;
+	uint8_t class;
+	uint8_t data;
+	uint8_t version;
+	uint8_t OS_ABI;
+	uint8_t ABIVersion;
+	uint16_t type;
+	uint64_t entrypointaddress;
     };
-void read_elf_header(struct elf_header *elf);
+int read_elf_header(const char *filename, struct elf_header *elf);
+void print_elf_header(const struct elf_header *elf);
 
 #endif
