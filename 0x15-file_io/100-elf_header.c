@@ -6,6 +6,7 @@
 /**
  * read_elf_header - readads ELF header from a file
  * @filename: name of file
+ * @elf: pointer to elf_header structure
  * Return: 0
  */
 int read_elf_header(const char *filename, struct elf_header *elf)
@@ -36,15 +37,17 @@ void print_elf_header(const struct elf_header *elf)
 	printf("ELF Header:\n");
 	printf("	Magic:	0x%08X\n", elf->magic);
 	printf("	Class:	%d-bit\n", elf->class == 1 ? 32 : 64);
-	printf("	Data:	%s\n", elf->data == 1 ? "2's complement, little endian" : "2's complement, big endian");
+	printf("Data:%s\n", elf->data == 1 ? "2's clnt,lendian" : "2's clnt,bendian");
 	printf("	Version: %d (current)\n", elf->version);
 	printf("	OS/ABI:	%d\n", elf->OS_ABI);
 	printf("	ABI Version:	%d\n", elf->ABIVersion);
 	printf("	Type:	0x%04X (EXEC)\n", elf->type);
-	printf("	Entry point address:	0x%016lX\n", elf->entrypointaddress);
+	printf("	Entry address:	0x%016lX\n", elf->entrypointaddress);
 }
 /**
  * main - displays information in the ELF header at start of an ELF file
+ * @argc: argument count
+ * @argv: arguments
  * Return: 0
  */
 int main(int argc, char *argv[])
