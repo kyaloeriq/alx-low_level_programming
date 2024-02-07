@@ -53,6 +53,8 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
                 {
                         free(temp->value);
                         temp->value = strdup(value); /*Update the value*/
+			if (temp->value == NULL)
+				return (0); /*Memory allocation failed*/
                         return (1); }
                 temp = temp->next; }
         /*If key doesn't exist, create a new node*/
@@ -141,9 +143,9 @@ void shash_table_print_rev(const shash_table_t *ht)
         if (ht != NULL)
         {
                 printf("{");
-                for (j = 0; j < ht->size; j++)
+                for (j = ht->size; j > 0; j--)
                 {
-                        node = ht->array[j];
+                        node = ht->array[j - 1];
                         while (node != NULL)
                         {
                                 if (flag == 1)
