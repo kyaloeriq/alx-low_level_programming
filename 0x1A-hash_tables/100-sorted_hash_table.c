@@ -29,9 +29,9 @@ shash_table_t *shash_table_create(unsigned long int size)
 }
 /**
  * shash_table_set - adds an element to the hash table
- * @ht: pointer to hash table you want to add or update the key/value to
- * @key: pointer to key
- * @value: pointer to value associated with the key
+ * @ht: hash table you want to add or update the key/value to
+ * @key: key
+ * @value: value associated with the key
  * Return: 1 if it succeeded, 0 otherwise
  */
 int shash_table_set(shash_table_t *ht, const char *key, const char *value)
@@ -74,4 +74,29 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
         new_node->next = ht->array[index];
         ht->array[index] = new_node;
         return (1);
+}
+/**
+ * shash_table_get - retrieves a value associated with a key
+ * @ht: hash table you want to look into
+ * @key: key you are looking for
+ * Return: value associated with the element, NULL if key couldn’t be found
+ */
+char *shash_table_get(const shash_table_t *ht, const char *key)
+{
+        unsigned long int index;
+        shash_node_t *node;
+
+        if (ht == NULL || key == NULL || *key == '\0')
+                return (NULL);
+
+        index = key_index((const unsigned char *)key, ht->size);
+        node = ht->array[index];
+
+        while (node != NULL)
+        {
+                if (strcmp(node->key, key) == 0)
+                        return (node->value);
+                node = node->next;
+        }
+        return (NULL);
 }
