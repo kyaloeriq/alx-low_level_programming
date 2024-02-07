@@ -100,3 +100,31 @@ char *shash_table_get(const shash_table_t *ht, const char *key)
         }
         return (NULL);
 }
+/**
+ * shash_table_print - prints a hash table
+ * @ht: hash table
+ */
+void shash_table_print(const shash_table_t *ht);
+{
+        unsigned long int j;
+	shash_node_t *node;
+        int flag = 0;
+
+        if (ht != NULL)
+        {
+                printf("{");
+                for (j = 0; j < ht->size; j++)
+                {
+                        node = ht->array[j];
+                        while (node != NULL)
+                        {
+                                if (flag == 1)
+                                        printf(", ");
+                                printf("'%s': '%s'", node->key, node->value);
+                                node = node->next;
+                                flag = 1;
+                        }
+                }
+                printf("}\n");
+        }
+}
