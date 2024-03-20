@@ -1,16 +1,14 @@
 # Makefile for building the 'school' executable
 
 CC = gcc
-CFLAGS = -Wall -Wextra -g
 
-SRCS = main.c school.c
-OBJS = $(SRCS:.c=.o)
+SRC = main.c school.c
 
-EXEC = school
-all: $(EXEC)
+school: $(SRC)
+	$(CC) -o $@ $^
 
-$(EXEC): $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $^
+# Rule to build the executable
+all: school
 
 clean:
-	rm -f $(OBJS) $(EXEC)
+	rm -f school
